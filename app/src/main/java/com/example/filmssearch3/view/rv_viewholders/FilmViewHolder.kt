@@ -4,15 +4,16 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmssearch3.domain.Film
 import com.bumptech.glide.Glide
+import com.example.filmssearch3.databinding.FilmItemBinding
 
 //В конструктор класс передается layout, который мы создали(film_item.xml)
-class FilmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class FilmViewHolder(binding: FilmItemBinding) : RecyclerView.ViewHolder(binding.root) {
     //Привязываем view из layout к переменным
-    private val title = itemView.title
-    private val poster = itemView.poster
-    private val description = itemView.description
+    private val title = binding.title
+    private val poster = binding.poster
+    private val description = binding.description
     //Вот здесь мы находим в верстке наш прогресс бар для рейтинга
-    private val ratingDonut = itemView.rating_donut
+    private val ratingDonut = binding.ratingDonut
 
     //В этом методе кладем данные из film в наши view
     fun bind(film: Film) {

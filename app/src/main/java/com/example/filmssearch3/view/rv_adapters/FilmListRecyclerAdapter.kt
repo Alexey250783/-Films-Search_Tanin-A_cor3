@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.filmssearch3.domain.Film
 import com.example.filmssearch3.view.rv_viewholders.FilmViewHolder
 import com.example.filmssearch3.R
-
+import com.example.filmssearch3.databinding.FilmItemBinding
 
 //в параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса активити
 class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
