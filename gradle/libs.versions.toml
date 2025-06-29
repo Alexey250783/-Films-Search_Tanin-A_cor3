@@ -19,6 +19,9 @@ recyclerview = "1.4.0"
 cardviewV7 = "28.0.0"
 glide = "5.0.0-rc01"
 compilerVersion = "5.0.0-rc01"
+designFloatingactionbutton = "28.0.0-alpha1"
+designBottomappbar = "28.0.0-alpha1"
+designWidget = "28.0.0-alpha1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -39,6 +42,9 @@ androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview"
 cardview-v7 = { group = "com.android.support", name = "cardview-v7", version.ref = "cardviewV7" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "compilerVersion" }
+design-floatingactionbutton = { group = "com.android.support", name = "design-floatingactionbutton", version.ref = "designFloatingactionbutton" }
+design-bottomappbar = { group = "com.android.support", name = "design-bottomappbar", version.ref = "designBottomappbar" }
+design-widget = { group = "com.android.support", name = "design-widget", version.ref = "designWidget" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

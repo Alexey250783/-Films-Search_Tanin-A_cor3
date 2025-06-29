@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.filmssearch3.R
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.filmssearch3.domain.Film
 import com.example.filmssearch3.view.rv_adapters.FilmListRecyclerAdapter
@@ -30,7 +29,7 @@ class FavoritesFragment : Fragment() {
         //Получаем список при транзакции фрагмента
         val favoritesList: List<Film> = emptyList()
 
-        AnimationHelper.performFragmentCircularRevealAnimation(favorites_fragment_root, requireActivity(),2)
+        AnimationHelper.performFragmentCircularRevealAnimation(binding.favoritesFragmentRoot, requireActivity(),2)
 
         binding.favoritesRecycler.apply {
             filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {

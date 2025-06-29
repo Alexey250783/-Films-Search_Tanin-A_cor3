@@ -30,7 +30,7 @@ class HomeFragment : Fragment() {
         set(value) {
             //Если придет такое же значение то мы выходим из метода
             if (field == value) return
-            //Если прило другое значение, то кладем его в переменную
+            //Если пришло другое значение, то кладем его в переменную
             field = value
             //Обновляем RV адаптер
             filmsAdapter.addItems(field)
@@ -52,7 +52,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        AnimationHelper.performFragmentCircularRevealAnimation(home_fragment_root, requireActivity(), 1)
+        AnimationHelper.performFragmentCircularRevealAnimation(binding.homeFragmentRoot, requireActivity(), 1)
 
         initSearchView()
 
@@ -66,12 +66,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun initSearchView() {
-        search_view.setOnClickListener {
-            search_view.isIconified = false
+        binding.searchView.setOnClickListener {
+            binding.searchView.isIconified = false
         }
 
         //Подключаем слушателя изменений введенного текста в поиска
-        search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             //Этот метод отрабатывает при нажатии кнопки "поиск" на софт клавиатуре
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
@@ -98,7 +98,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initRecyckler() {
-        main_recycler.apply {
+        binding.mainRecycler.apply {
             filmsAdapter =
                 FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
                     override fun click(film: Film) {

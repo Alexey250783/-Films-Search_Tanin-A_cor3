@@ -64,6 +64,6 @@ class MainRepository {
             R.drawable.poster_20_mufasa,
             "Orphaned Mufasa meets a royal heir named Taka.",
             8.4f
-        ),
+        )
     )
 }

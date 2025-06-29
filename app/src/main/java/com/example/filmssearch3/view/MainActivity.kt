@@ -1,13 +1,9 @@
 package com.example.filmssearch3.view
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.filmssearch3.R
 import androidx.fragment.app.Fragment
-import com.example.filmssearch3.*
 import com.example.filmssearch3.databinding.ActivityMainBinding
 import com.example.filmssearch3.domain.Film
 import com.example.filmssearch3.view.fragments.*
