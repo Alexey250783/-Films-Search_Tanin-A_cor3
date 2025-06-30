@@ -62,6 +62,8 @@ dependencies {
     implementation(libs.androidx.versionedparcelable)
     implementation(libs.versionedparcelable)
     implementation(libs.androidx.lifecycle.extensions)
+    implementation(libs.coordinatorlayout)
+    implementation(libs.design.circularreveal.coordinatorlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -1,5 +1,5 @@
 [versions]
-agp = "8.10.1"
+agp = "8.11.0"
 kotlin = "2.0.21"
 coreKtx = "1.16.0"
 junit = "4.13.2"
@@ -25,6 +25,8 @@ designWidget = "28.0.0-alpha1"
 versionedparcelable = "1.2.1"
 versionedparcelableVersion = "28.0.0"
 lifecycleExtensions = "2.2.0"
+coordinatorlayout = "28.0.0"
+designCircularrevealCoordinatorlayout = "28.0.0-alpha1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -51,6 +53,8 @@ design-widget = { group = "com.android.support", name = "design-widget", version
 androidx-versionedparcelable = { group = "androidx.versionedparcelable", name = "versionedparcelable", version.ref = "versionedparcelable" }
 versionedparcelable = { group = "com.android.support", name = "versionedparcelable", version.ref = "versionedparcelableVersion" }
 androidx-lifecycle-extensions = { group = "androidx.lifecycle", name = "lifecycle-extensions", version.ref = "lifecycleExtensions" }
+coordinatorlayout = { group = "com.android.support", name = "coordinatorlayout", version.ref = "coordinatorlayout" }
+design-circularreveal-coordinatorlayout = { group = "com.android.support", name = "design-circularreveal-coordinatorlayout", version.ref = "designCircularrevealCoordinatorlayout" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
