@@ -22,6 +22,9 @@ compilerVersion = "5.0.0-rc01"
 designFloatingactionbutton = "28.0.0-alpha1"
 designBottomappbar = "28.0.0-alpha1"
 designWidget = "28.0.0-alpha1"
+versionedparcelable = "1.2.1"
+versionedparcelableVersion = "28.0.0"
+lifecycleExtensions = "2.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -45,6 +48,9 @@ compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref
 design-floatingactionbutton = { group = "com.android.support", name = "design-floatingactionbutton", version.ref = "designFloatingactionbutton" }
 design-bottomappbar = { group = "com.android.support", name = "design-bottomappbar", version.ref = "designBottomappbar" }
 design-widget = { group = "com.android.support", name = "design-widget", version.ref = "designWidget" }
+androidx-versionedparcelable = { group = "androidx.versionedparcelable", name = "versionedparcelable", version.ref = "versionedparcelable" }
+versionedparcelable = { group = "com.android.support", name = "versionedparcelable", version.ref = "versionedparcelableVersion" }
+androidx-lifecycle-extensions = { group = "androidx.lifecycle", name = "lifecycle-extensions", version.ref = "lifecycleExtensions" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
