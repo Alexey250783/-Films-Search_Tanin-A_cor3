@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.filmssearch3.domain.Film
-import com.example.filmssearch3.R
 import com.example.filmssearch3.view.rv_adapters.TopSpacingItemDecoration
 import com.example.filmssearch3.databinding.FragmentHomeBinding
 import com.example.filmssearch3.utils.AnimationHelper
@@ -52,7 +51,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        AnimationHelper.performFragmentCircularRevealAnimation(binding.homeFragmentRoot, requireActivity(), 1)
+        AnimationHelper.performFragmentCircularRevealAnimation(
+            binding.homeFragmentRoot,
+            requireActivity(),
+            1
+        )
 
         initSearchView()
 

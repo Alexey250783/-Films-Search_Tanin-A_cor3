@@ -1,5 +1,5 @@
 [versions]
-agp = "8.11.0"
+agp = "8.13.0"
 kotlin = "2.0.21"
 coreKtx = "1.16.0"
 junit = "4.13.2"
@@ -27,6 +27,15 @@ versionedparcelableVersion = "28.0.0"
 lifecycleExtensions = "2.2.0"
 coordinatorlayout = "28.0.0"
 designCircularrevealCoordinatorlayout = "28.0.0-alpha1"
+retrofit = "2.9.0"
+converterGson = "2.6.0"
+loggingInterceptor = "3.12.6"
+media3DatasourceOkhttp = "1.8.0"
+adapterRxjava = "3.0.0"
+converterMoshi = "3.0.0"
+converterGsonVersion = "3.0.0"
+retrofitVersion = "3.0.0"
+loggingInterceptorVersion = "5.0.0-alpha.16"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -55,6 +64,15 @@ versionedparcelable = { group = "com.android.support", name = "versionedparcelab
 androidx-lifecycle-extensions = { group = "androidx.lifecycle", name = "lifecycle-extensions", version.ref = "lifecycleExtensions" }
 coordinatorlayout = { group = "com.android.support", name = "coordinatorlayout", version.ref = "coordinatorlayout" }
 design-circularreveal-coordinatorlayout = { group = "com.android.support", name = "design-circularreveal-coordinatorlayout", version.ref = "designCircularrevealCoordinatorlayout" }
+retrofit = { group = "retrofit2", name = "retrofit", version.ref = "retrofit" }
+converter-gson = { group = "retrofit2", name = "converter-gson", version.ref = "converterGson" }
+logging-interceptor = { group = "squareup.okhttp3", name = "logging-interceptor", version.ref = "loggingInterceptor" }
+androidx-media3-datasource-okhttp = { group = "androidx.media3", name = "media3-datasource-okhttp", version.ref = "media3DatasourceOkhttp" }
+adapter-rxjava = { group = "com.squareup.retrofit2", name = "adapter-rxjava", version.ref = "adapterRxjava" }
+converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "converterMoshi" }
+retrofit2-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "converterGsonVersion" }
+retrofit2-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
+okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "loggingInterceptorVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
