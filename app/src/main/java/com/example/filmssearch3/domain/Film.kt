@@ -8,9 +8,9 @@ import android.os.Parcel
 @Parcelize
 data class Film(
    val title: String,
-   val poster: Int,
+   val poster: String,
    val description: String,
-   var rating: Float = 0f,
+   var rating: Double = 0.0,
    var isInFavorites: Boolean = false
 ) : Parcelable {
    override fun describeContents(): Int {
@@ -19,9 +19,9 @@ data class Film(
 
    override fun writeToParcel(dest: Parcel, flags: Int) {
       dest.writeString(title)
-      dest.writeInt(poster)
+      dest.writeString(poster)
       dest.writeString(description)
-      dest.writeFloat(rating)
+      dest.writeDouble(rating)
       dest.writeBoolean(isInFavorites)
    }
 }

@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.filmssearch3"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.filmssearch3"
@@ -37,6 +37,16 @@ android {
         viewBinding = true
         dataBinding = true
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+                targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
 }
 
 dependencies {
@@ -64,6 +74,27 @@ dependencies {
     implementation(libs.androidx.lifecycle.extensions)
     implementation(libs.coordinatorlayout)
     implementation(libs.design.circularreveal.coordinatorlayout)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
+    implementation(libs.androidx.media3.datasource.okhttp)
+    implementation(libs.adapter.rxjava)
+    implementation(libs.converter.moshi)
+    implementation(libs.retrofit2.converter.gson)
+    implementation(libs.retrofit2.retrofit)
+    implementation(libs.okhttp3.logging.interceptor)
+    implementation(libs.koin.android)
+    implementation(libs.koin.android.scope)
+    implementation(libs.koin.androidx.viewmodel)
+    implementation(libs.koin.android.ext)
+    implementation(libs.koin.core)
+    implementation(libs.insert.koin.koin.android)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.koin.koin.android)
+    implementation(libs.com.android.application.gradle.plugin)
+    implementation(libs.org.jetbrains.kotlin.android.gradle.plugin)
+    implementation(libs.kotlin.stdlib)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
