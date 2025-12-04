@@ -1,5 +1,5 @@
 [versions]
-agp = "8.13.0"
+agp = "8.13.1"
 kotlin = "2.0.21"
 coreKtx = "1.16.0"
 junit = "4.13.2"
@@ -48,6 +48,9 @@ koinKoinAndroid = "$koin_version"
 comAndroidApplicationGradlePlugin = "9.0.0-alpha11"
 orgJetbrainsKotlinAndroidGradlePlugin = "2.2.0"
 kotlinStdlib = "2.2.0"
+dagger = "2.56.2"
+daggerCompiler = "2.56.2"
+material3 = "1.5.0-alpha09"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -97,6 +100,9 @@ koin-koin-android = { group = "org.koin", name = "koin-android", version.ref = "
 com-android-application-gradle-plugin = { group = "com.android.application", name = "com.android.application.gradle.plugin", version.ref = "comAndroidApplicationGradlePlugin" }
 org-jetbrains-kotlin-android-gradle-plugin = { group = "org.jetbrains.kotlin.android", name = "org.jetbrains.kotlin.android.gradle.plugin", version.ref = "orgJetbrainsKotlinAndroidGradlePlugin" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlinStdlib" }
+dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
+dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "daggerCompiler" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
