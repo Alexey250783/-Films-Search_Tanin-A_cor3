@@ -1,24 +1,24 @@
 [versions]
 agp = "8.13.1"
-kotlin = "2.0.21"
-coreKtx = "1.16.0"
+kotlin = "2.2.21"
+coreKtx = "1.17.0"
 junit = "4.13.2"
-junitVersion = "1.2.1"
-espressoCore = "3.6.1"
+junitVersion = "1.3.0"
+espressoCore = "3.7.0"
 appcompat = "1.7.1"
-material = "1.12.0"
-activity = "1.10.1"
+material = "1.13.0"
+activity = "1.12.1"
 constraintlayout = "2.2.1"
 cardview = "1.0.0"
 designBottomnavigation = "28.0.0-alpha1"
 customview = "28.0.0"
-animationGraphicsAndroid = "1.9.0-beta01"
-fragment = "1.8.8"
+animationGraphicsAndroid = "1.10.0"
+fragment = "1.8.9"
 compiler = "3.2.0-alpha11"
 recyclerview = "1.4.0"
 cardviewV7 = "28.0.0"
-glide = "5.0.0-rc01"
-compilerVersion = "5.0.0-rc01"
+glide = "5.0.5"
+compilerVersion = "5.0.5"
 designFloatingactionbutton = "28.0.0-alpha1"
 designBottomappbar = "28.0.0-alpha1"
 designWidget = "28.0.0-alpha1"
@@ -35,22 +35,25 @@ adapterRxjava = "3.0.0"
 converterMoshi = "3.0.0"
 converterGsonVersion = "3.0.0"
 retrofitVersion = "3.0.0"
-loggingInterceptorVersion = "5.0.0-alpha.16"
+loggingInterceptorVersion = "5.3.2"
 koinAndroid = "2.0.1"
 koinAndroidScope = "2.0.1"
 koinAndroidxViewmodel = "2.0.1"
 koinAndroidExt = "2.0.1"
-koinCore = "4.1.0"
-koinAndroidVersion = "4.1.0"
+koinCore = "4.1.1"
+koinAndroidVersion = "4.1.1"
 kotlinxCoroutinesAndroid = "1.10.2"
-lifecycleViewmodelKtx = "2.10.0-alpha05"
+lifecycleViewmodelKtx = "2.10.0"
 koinKoinAndroid = "$koin_version"
 comAndroidApplicationGradlePlugin = "9.0.0-alpha11"
-orgJetbrainsKotlinAndroidGradlePlugin = "2.2.0"
-kotlinStdlib = "2.2.0"
-dagger = "2.56.2"
-daggerCompiler = "2.56.2"
-material3 = "1.5.0-alpha09"
+orgJetbrainsKotlinAndroidGradlePlugin = "2.2.21"
+kotlinStdlib = "2.2.21"
+dagger = "2.57.2"
+daggerCompiler = "2.57.2"
+material3 = "1.5.0-alpha10"
+comAndroidLegacyKaptGradlePlugin = "9.0.0-beta03"
+androidxCompiler = "1.5.15"
+carUiLibPluginApis = "1.5.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -88,6 +91,7 @@ converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", 
 retrofit2-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "converterGsonVersion" }
 retrofit2-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
 okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "loggingInterceptorVersion" }
+#noinspection SimilarGradleDependency
 koin-android = { group = "org.koin", name = "koin-android", version.ref = "koinAndroid" }
 koin-android-scope = { group = "org.koin", name = "koin-android-scope", version.ref = "koinAndroidScope" }
 koin-androidx-viewmodel = { group = "org.koin", name = "koin-androidx-viewmodel", version.ref = "koinAndroidxViewmodel" }
@@ -96,6 +100,7 @@ koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koinC
 insert-koin-koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koinAndroidVersion" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+#noinspection SimilarGradleDependency
 koin-koin-android = { group = "org.koin", name = "koin-android", version.ref = "koinKoinAndroid" }
 com-android-application-gradle-plugin = { group = "com.android.application", name = "com.android.application.gradle.plugin", version.ref = "comAndroidApplicationGradlePlugin" }
 org-jetbrains-kotlin-android-gradle-plugin = { group = "org.jetbrains.kotlin.android", name = "org.jetbrains.kotlin.android.gradle.plugin", version.ref = "orgJetbrainsKotlinAndroidGradlePlugin" }
@@ -103,6 +108,9 @@ kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", versio
 dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
 dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "daggerCompiler" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
+com-android-legacy-kapt-gradle-plugin = { group = "com.android.legacy-kapt", name = "com.android.legacy-kapt.gradle.plugin", version.ref = "comAndroidLegacyKaptGradlePlugin" }
+androidx-compose-compiler-compiler = { group = "androidx.compose.compiler", name = "compiler", version.ref = "androidxCompiler" }
+car-ui-lib-plugin-apis = { group = "com.android.car.ui", name = "car-ui-lib-plugin-apis", version.ref = "carUiLibPluginApis" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
