@@ -1,5 +1,6 @@
 package com.example.filmssearch3.view.rv_viewholders
 
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmssearch3.domain.Film
 import com.bumptech.glide.Glide
