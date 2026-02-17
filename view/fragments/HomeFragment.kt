@@ -17,6 +17,8 @@ import com.example.filmssearch3.view.MainActivity
 import com.example.filmssearch3.view.rv_adapters.FilmListRecyclerAdapter
 import com.example.filmssearch3.viewmodel.HomeFragmentViewModel
 import java.util.*
+import com.example.filmssearch3.R
+
 
 class HomeFragment : Fragment() {
     private val viewModel by lazy {
@@ -37,7 +39,6 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        retainInstance = true
     }
 
     override fun onCreateView(
@@ -60,16 +61,29 @@ class HomeFragment : Fragment() {
         initSearchView()
 
         //находим наш RV
-        initRecyckler()
+        initRecycler()
+        initPullToRefresh()
         //Кладем нашу БД в RV
         viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
             filmsDataBase = it
+            filmsAdapter.addItems(it)
         })
+    }
 
+    private fun initPullToRefresh() {
+        //Вешаем слушатель, чтобы вызвался pull to refresh
+        binding.pullToRefresh.setOnRefreshListener {
+            //Чистим адаптер(items нужно будет сделать паблик или создать для этого публичный метод)
+            filmsAdapter.items.clear()
+            //Делаем новый запрос фильмов на сервер
+            viewModel.getFilms()
+            //Убираем крутящиеся колечко
+            binding.pullToRefresh.isRefreshing = false
+        }
     }
 
     private fun initSearchView() {
-        binding.searchView.setOnClickListener {
+        binding.searchView.setOnSearchClickListener {
             binding.searchView.isIconified = false
         }
 
@@ -100,7 +114,7 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun initRecyckler() {
+    private fun initRecycler() {
         binding.mainRecycler.apply {
             filmsAdapter =
                 FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {

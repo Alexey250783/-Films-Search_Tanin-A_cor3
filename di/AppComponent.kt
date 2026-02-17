@@ -6,6 +6,8 @@ import com.example.filmssearch3.di.modules.RemoteModule
 import com.example.filmssearch3.viewmodel.HomeFragmentViewModel
 import dagger.Component
 import javax.inject.Singleton
+import com.example.filmssearch3.viewmodel.SettingsFragmentViewModel
+
 
 @Singleton
 @Component(
@@ -17,6 +19,8 @@ import javax.inject.Singleton
     ]
 )
 interface AppComponent {
-    //метод для того, чтобы появилась внедрять зависимости в HomeFragmentViewModel
+    //метод для того, чтобы появилась возможность внедрять зависимости в HomeFragmentViewModel
     fun inject(homeFragmentViewModel: HomeFragmentViewModel)
+    //метод для того, чтобы появилась возможность внедрять зависимости в SettingsFragmentViewModel
+    fun inject(settingsFragmentViewModel: SettingsFragmentViewModel)
 }
