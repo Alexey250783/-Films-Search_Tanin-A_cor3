@@ -44,6 +44,6 @@ class Interactor(
 
     //Метод для получения настроек
     fun getDefaultCategoryFromPreferences() = preferences.geDefaultCategory()!!
-
+    //Метод будет дергать метод репозитория, чтобы забрать фильмы из БД
     fun getFilmsFromDB(): List<Film> = repo.getAllFromDB()
 }
