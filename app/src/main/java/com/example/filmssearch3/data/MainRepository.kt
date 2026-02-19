@@ -8,6 +8,7 @@ import com.example.filmssearch3.domain.Film
 class MainRepository(databaseHelper: DatabaseHelper) {
     //Инициализируем объект для взаимодействия с БД
     private val sqlDb = databaseHelper.readableDatabase
+
     //Создаем курсор для обработки запросов из БД
     private lateinit var cursor: Cursor
 
@@ -32,7 +33,7 @@ class MainRepository(databaseHelper: DatabaseHelper) {
         val result = mutableListOf<Film>()
         //Проверяем есть ли хоть одна строка в ответе на запрос
         if (cursor.moveToFirst()) {
-            //Итерируемся по таблице, пока есть записи и создаем на основании объект Film
+            //Итерируемся по таблице, пока есть записи  создаем на основании объект Film
             do {
                 val title = cursor.getString(1)
                 val poster = cursor.getString(2)
