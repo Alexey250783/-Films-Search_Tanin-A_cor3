@@ -71,6 +71,7 @@ dependencies {
     implementation(libs.dagger)
     implementation(libs.car.ui.lib.plugin.apis)
     implementation(libs.swiperefreshlayout)
+    implementation(libs.design.floatingactionbutton)
     kapt(libs.dagger.compiler)
     implementation(libs.androidx.material3)
     implementation(libs.com.android.legacy.kapt.gradle.plugin)
