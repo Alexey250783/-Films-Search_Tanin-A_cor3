@@ -1,8 +1,21 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     kotlin("kapt")
+    id("kotlin-parcelize")
 }
+kotlin
+
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.fromTarget("1.8")
+    // Если были другие настройки, например freeCompilerArgs, их тоже нужно перенести.
+    // freeCompilerArgs.addAll(listOf("-Xopt-in=kotlin.RequiresOptIn"))
+    }
+}
+
 
 android {
     namespace = "com.example.filmssearch3"
@@ -43,14 +56,15 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+
 }
+
 dependencies {
 
+    implementation(libs.squareup.logging.interceptor)
+    implementation(libs.okhttp)
+    val roomVersion = "2.8.4"
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
@@ -59,20 +73,19 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.glide)
     implementation(libs.compiler)
-    implementation(libs.androidx.lifecycle.extensions)
-    implementation(libs.adapter.rxjava)
     implementation(libs.converter.moshi)
     implementation(libs.retrofit2.converter.gson)
     implementation(libs.retrofit2.retrofit)
-    implementation(libs.okhttp3.logging.interceptor)
-    implementation(libs.kotlinx.coroutines.android)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.kotlin.stdlib)
     implementation(libs.dagger)
     implementation(libs.car.ui.lib.plugin.apis)
     implementation(libs.swiperefreshlayout)
+    implementation(libs.runtime)
+    implementation(libs.room.compiler)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.testing)
     kapt(libs.dagger.compiler)
-    implementation(libs.androidx.material3)
     implementation(libs.com.android.legacy.kapt.gradle.plugin)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

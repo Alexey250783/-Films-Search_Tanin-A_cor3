@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.filmssearch3.domain.Film
+import com.example.filmssearch3.data.entity.Film
 import com.example.filmssearch3.view.rv_adapters.FilmListRecyclerAdapter
 import com.example.filmssearch3.view.rv_adapters.TopSpacingItemDecoration
 import com.example.filmssearch3.databinding.FragmentFavoritesBinding

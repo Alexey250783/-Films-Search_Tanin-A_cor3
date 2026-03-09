@@ -3,9 +3,8 @@ package com.example.filmssearch3.view.rv_adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.filmssearch3.domain.Film
+import com.example.filmssearch3.data.entity.Film
 import com.example.filmssearch3.view.rv_viewholders.FilmViewHolder
-import com.example.filmssearch3.R
 import com.example.filmssearch3.databinding.FilmItemBinding
 
 
@@ -13,16 +12,15 @@ import com.example.filmssearch3.databinding.FilmItemBinding
 class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     //Здесь у нас хранится список элементов для RV
-    private val items = mutableListOf<Film>()
+    val items = mutableListOf<Film>()
 
     //Этот метод нужно переопределить на возврат количества елементов в списке RV
     override fun getItemCount() = items.size
 
     //В этом методе мы привязываем наш view holder и передаем туда "надутую" верстку нашего фильма
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return FilmViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.film_item, parent, false)
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmViewHolder {
+        val binding = FilmItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return FilmViewHolder(binding)
     }
 
     //В этом методе будет привзяка полей из объекта Film, к view из film_item.xml
