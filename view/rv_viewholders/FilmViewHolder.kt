@@ -1,7 +1,7 @@
 package com.example.filmssearch3.view.rv_viewholders
 
 import androidx.recyclerview.widget.RecyclerView
-import com.example.filmssearch3.domain.Film
+import com.example.filmssearch3.data.entity.Film
 import com.bumptech.glide.Glide
 import com.example.filmssearch3.data.ApiConstants
 import com.example.filmssearch3.databinding.FilmItemBinding

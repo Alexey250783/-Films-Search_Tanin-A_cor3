@@ -2,6 +2,7 @@ package com.example.filmssearch3.domain
 
 import com.example.filmssearch3.data.MainRepository
 import com.example.filmssearch3.data.*
+import com.example.filmssearch3.data.entity.Film
 import com.example.filmssearch3.data.Entity.TmdbResults
 import com.example.filmssearch3.data.preferenes.PreferenceProvider
 import com.example.filmssearch3.utils.Converter
@@ -24,9 +25,7 @@ class Interactor(
                     //При успехе мы вызываем метод передаем onSuccess и в этот коллбэк список фильмов
                     val list = Converter.convertApiListToDTOList(response.body()?.tmdbFilms)
                     //Кладем фильмы в бд
-                    list.forEach {
-                        repo.putToDb(film = it)
-                    }
+                    repo.putToDb(list)
                     callback.onSuccess(list)
                 }
 
@@ -43,7 +42,8 @@ class Interactor(
     }
 
     //Метод для получения настроек
-    fun getDefaultCategoryFromPreferences() = preferences.geDefaultCategory()!!
+    fun getDefaultCategoryFromPreferences() = preferences.geDefaultCategory()
+
     //Метод будет дергать метод репозитория, чтобы забрать фильмы из БД
     fun getFilmsFromDB(): List<Film> = repo.getAllFromDB()
 }

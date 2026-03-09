@@ -3,9 +3,8 @@ package com.example.filmssearch3.view.rv_adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.filmssearch3.domain.Film
+import com.example.filmssearch3.data.entity.Film
 import com.example.filmssearch3.view.rv_viewholders.FilmViewHolder
-import com.example.filmssearch3.R
 import com.example.filmssearch3.databinding.FilmItemBinding
 
 

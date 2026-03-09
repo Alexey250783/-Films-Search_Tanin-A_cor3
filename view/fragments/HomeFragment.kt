@@ -9,7 +9,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.filmssearch3.domain.Film
+import com.example.filmssearch3.data.entity.Film
 import com.example.filmssearch3.view.rv_adapters.TopSpacingItemDecoration
 import com.example.filmssearch3.databinding.FragmentHomeBinding
 import com.example.filmssearch3.utils.AnimationHelper
@@ -17,8 +17,6 @@ import com.example.filmssearch3.view.MainActivity
 import com.example.filmssearch3.view.rv_adapters.FilmListRecyclerAdapter
 import com.example.filmssearch3.viewmodel.HomeFragmentViewModel
 import java.util.*
-import com.example.filmssearch3.R
-
 
 class HomeFragment : Fragment() {
     private val viewModel by lazy {

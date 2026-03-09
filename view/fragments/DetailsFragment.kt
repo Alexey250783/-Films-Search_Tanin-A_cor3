@@ -10,7 +10,7 @@ import android.content.Intent
 import com.bumptech.glide.Glide
 import com.example.filmssearch3.data.ApiConstants
 import com.example.filmssearch3.databinding.FragmentDetailsBinding
-import com.example.filmssearch3.domain.Film
+import com.example.filmssearch3.data.entity.Film
 
 class DetailsFragment : Fragment() {
     private lateinit var film: Film

@@ -2,11 +2,11 @@ package com.example.filmssearch3.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.filmssearch3.domain.Film
-import com.example.filmssearch3.domain.Interactor
 import com.example.filmssearch3.App
+import com.example.filmssearch3.data.entity.Film
+import com.example.filmssearch3.domain.Interactor
+import java.util.concurrent.Executors
 import javax.inject.Inject
-
 
 class HomeFragmentViewModel : ViewModel() {
     val filmsListLiveData: MutableLiveData<List<Film>> = MutableLiveData()
@@ -27,7 +27,9 @@ class HomeFragmentViewModel : ViewModel() {
             }
 
             override fun onFailure() {
-                filmsListLiveData.postValue(interactor.getFilmsFromDB())
+                Executors.newSingleThreadExecutor().execute {
+                    filmsListLiveData.postValue(interactor.getFilmsFromDB())
+                }
             }
         })
     }
