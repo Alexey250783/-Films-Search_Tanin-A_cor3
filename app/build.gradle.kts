@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId = "com.example.filmssearch3"
         minSdk = 34
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -31,10 +31,6 @@ android {
             buildConfigField("String", "API_KEY", "\"prod_key_456\"")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
     }
 
     buildFeatures {
@@ -74,6 +70,8 @@ dependencies {
     implementation(libs.kotlin.stdlib)
     implementation(libs.dagger)
     implementation(libs.car.ui.lib.plugin.apis)
+    implementation(libs.swiperefreshlayout)
+    implementation(libs.design.floatingactionbutton)
     kapt(libs.dagger.compiler)
     implementation(libs.androidx.material3)
     implementation(libs.com.android.legacy.kapt.gradle.plugin)
@@ -81,4 +79,3 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
-
