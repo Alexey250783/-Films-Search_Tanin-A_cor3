@@ -1,5 +1,6 @@
 package com.example.filmssearch3.domain
 
+import androidx.lifecycle.LiveData
 import com.example.filmssearch3.data.MainRepository
 import com.example.filmssearch3.data.*
 import com.example.filmssearch3.data.entity.Film
@@ -26,7 +27,7 @@ class Interactor(
                     val list = Converter.convertApiListToDTOList(response.body()?.tmdbFilms)
                     //Кладем фильмы в бд
                     repo.putToDb(list)
-                    callback.onSuccess(list)
+                    callback.onSuccess()
                 }
 
                 override fun onFailure(call: Call<TmdbResults>, t: Throwable) {
@@ -45,5 +46,5 @@ class Interactor(
     fun getDefaultCategoryFromPreferences() = preferences.geDefaultCategory()
 
     //Метод будет дергать метод репозитория, чтобы забрать фильмы из БД
-    fun getFilmsFromDB(): List<Film> = repo.getAllFromDB()
+    fun getFilmsFromDB(): LiveData<List<Film>> = repo.getAllFromDB()
 }
