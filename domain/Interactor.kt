@@ -1,50 +1,56 @@
 package com.example.filmssearch3.domain
 
-import androidx.lifecycle.LiveData
-import com.example.filmssearch3.data.MainRepository
-import com.example.filmssearch3.data.*
-import com.example.filmssearch3.data.entity.Film
+import com.example.filmssearch3.data.API
 import com.example.filmssearch3.data.Entity.TmdbResults
+import com.example.filmssearch3.data.MainRepository
+import com.example.filmssearch3.data.TmdbApi
+import com.example.filmssearch3.data.entity.Film
 import com.example.filmssearch3.data.preferenes.PreferenceProvider
 import com.example.filmssearch3.utils.Converter
-import com.example.filmssearch3.viewmodel.HomeFragmentViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+class Interactor(private val repo: MainRepository, private val retrofitService: TmdbApi, private val preferences: PreferenceProvider) {
+    val scope: CoroutineScope = CoroutineScope(Dispatchers.IO)
+    var progressBarState = Channel<Boolean>(Channel.CONFLATED)
 
-class Interactor(
-    private val repo: MainRepository,
-    private val retrofitService: TmdbApi,
-    private val preferences: PreferenceProvider
-) {
-    fun getFilmsFromApi(page: Int, callback: HomeFragmentViewModel.ApiCallback) {
+    fun getFilmsFromApi(page: Int) {
+        //Показываем ProgressBar
+        scope.launch {
+            progressBarState.send(true)
+        }
         //Метод getDefaultCategoryFromPreferences() будет нам получать при каждом запросе нужный нам список фильмов
-        retrofitService.getFilms(getDefaultCategoryFromPreferences(), API.KEY, "ru-RU", page)
-            .enqueue(object : Callback<TmdbResults> {
-                override fun onResponse(call: Call<TmdbResults>, response: Response<TmdbResults>) {
-                    //При успехе мы вызываем метод передаем onSuccess и в этот коллбэк список фильмов
-                    val list = Converter.convertApiListToDTOList(response.body()?.tmdbFilms)
-                    //Кладем фильмы в бд
+        retrofitService.getFilms(getDefaultCategoryFromPreferences(), API.KEY, "ru-RU", page).enqueue(object : Callback<TmdbResults> {
+            override fun onResponse(call: Call<TmdbResults>, response: Response<TmdbResults>) {
+                val list = Converter.convertApiListToDTOList(response.body()?.tmdbFilms)
+                //Кладем фильмы в бд
+                //В случае успешного ответа кладем фильмы в БД и выключаем ProgressBar
+                scope.launch {
                     repo.putToDb(list)
-                    callback.onSuccess()
+                    progressBarState.send(false)
                 }
+            }
 
-                override fun onFailure(call: Call<TmdbResults>, t: Throwable) {
-                    //В случае провала вызываем другой метод коллбека
-                    callback.onFailure()
+            override fun onFailure(call: Call<TmdbResults>, t: Throwable) {
+                //В случае провала выключаем ProgressBar
+                scope.launch {
+                    progressBarState.send(false)
                 }
-            })
+            }
+        })
     }
-
     //Метод для сохранения настроек
     fun saveDefaultCategoryToPreferences(category: String) {
         preferences.saveDefaultCategory(category)
     }
-
     //Метод для получения настроек
     fun getDefaultCategoryFromPreferences() = preferences.geDefaultCategory()
 
-    //Метод будет дергать метод репозитория, чтобы забрать фильмы из БД
-    fun getFilmsFromDB(): LiveData<List<Film>> = repo.getAllFromDB()
+    fun getFilmsFromDB(): Flow<List<Film>> = repo.getAllFromDB()
 }

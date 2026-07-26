@@ -3,6 +3,7 @@ package com.example.filmssearch3.data
 import androidx.lifecycle.LiveData
 import com.example.filmssearch3.data.dao.FilmDao
 import com.example.filmssearch3.data.entity.Film
+import kotlinx.coroutines.flow.Flow
 import java.util.concurrent.Executors
 
 class MainRepository(private val filmDao: FilmDao) {
@@ -14,5 +15,5 @@ class MainRepository(private val filmDao: FilmDao) {
         }
     }
 
-    fun getAllFromDB(): LiveData<List<Film>> = filmDao.getCachedFilms()
+    fun getAllFromDB(): Flow<List<Film>> = filmDao.getCachedFilms()
 }
