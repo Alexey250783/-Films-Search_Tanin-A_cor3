@@ -63,6 +63,10 @@ dependencies {
 
     implementation(libs.squareup.logging.interceptor)
     implementation(libs.okhttp)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.jetbrains.kotlinx.coroutines.core)
     val roomVersion = "2.8.4"
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
