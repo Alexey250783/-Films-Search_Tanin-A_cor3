@@ -1,5 +1,6 @@
 package com.example.filmssearch3.view.fragments
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.filmssearch3.utils.AutoDisposable
+import com.example.filmssearch3.utils.addTo
 import com.example.filmssearch3.data.entity.Film
 import com.example.filmssearch3.databinding.FragmentHomeBinding
 import com.example.filmssearch3.utils.AnimationHelper
@@ -16,8 +19,8 @@ import com.example.filmssearch3.view.MainActivity
 import com.example.filmssearch3.view.rv_adapters.FilmListRecyclerAdapter
 import com.example.filmssearch3.view.rv_adapters.TopSpacingItemDecoration
 import com.example.filmssearch3.viewmodel.HomeFragmentViewModel
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collect
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.*
 
 
@@ -25,13 +28,15 @@ class HomeFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
     }
+
+    private val autoDisposable = AutoDisposable()
+
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var scope: CoroutineScope
     private var filmsDataBase = listOf<Film>()
         //Используем backing field
         set(value) {
-            //Если придет такое же значение то мы выходим из метода
+            //Если придет такое же значение, то мы выходим из метода
             if (field == value) return
             //Если прило другое значение, то кладем его в переменную
             field = value
@@ -41,6 +46,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        autoDisposable.bindTo(lifecycle)
         retainInstance = true
     }
 
@@ -67,28 +73,21 @@ class HomeFragment : Fragment() {
         initRecyckler()
         //Кладем нашу БД в RV
 
-        scope = CoroutineScope(Dispatchers.IO).also { scope ->
-            scope.launch {
-                viewModel.filmsListData.collect {
-                    withContext(Dispatchers.Main) {
-                        filmsAdapter.addItems(it)
-                        filmsDataBase = it
-                    }
-                }
+        viewModel.filmsListData
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { list ->
+                filmsAdapter.addItems(list)
+                filmsDataBase = list
             }
-            scope.launch {
-                for (element in viewModel.showProgressBar) {
-                    launch(Dispatchers.Main) {
-                        binding.progressBar.isVisible = element
-                    }
-                }
+            .addTo(autoDisposable)
+        viewModel.showProgressBar
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                binding.progressBar.isVisible = it
             }
-        }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        scope.cancel()
+            .addTo(autoDisposable)
     }
 
     private fun initPullToRefresh() {
@@ -117,7 +116,7 @@ class HomeFragment : Fragment() {
 
             //Этот метод отрабатывает на каждое изменения текста
             override fun onQueryTextChange(newText: String): Boolean {
-                //Если ввод пуст то вставляем в адаптер всю БД
+                //Если ввод пуст, то вставляем в адаптер всю БД
                 if (newText.isEmpty()) {
                     filmsAdapter.addItems(filmsDataBase)
                     return true
