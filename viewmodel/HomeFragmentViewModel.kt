@@ -12,13 +12,12 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-
 class HomeFragmentViewModel : ViewModel() {
     //Инициализируем интерактор
     @Inject
     lateinit var interactor: Interactor
     val filmsListData: Observable<List<Film>>
-    val showProgressBar: Channel<Boolean>
+    val showProgressBar: BehaviorSubject<Boolean>
 
     init {
         App.instance.dagger.inject(this)
@@ -30,4 +29,7 @@ class HomeFragmentViewModel : ViewModel() {
     fun getFilms() {
         interactor.getFilmsFromApi(1)
     }
+
+    fun getSearchResult(search: String) = interactor.getSearchResultFromApi(search)
+
 }
