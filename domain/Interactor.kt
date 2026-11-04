@@ -15,6 +15,15 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
+import io.reactivex.rxjava3.subjects.BehaviorSubject
+import io.reactivex.rxjava3.subjects.PublishSubject
+
+
+import kotlinx.coroutines.flow.Flow
 
 
 class Interactor(
@@ -22,14 +31,11 @@ class Interactor(
     private val retrofitService: TmdbApi,
     private val preferences: PreferenceProvider
 ) {
-    val scope: CoroutineScope = CoroutineScope(Dispatchers.IO)
-    var progressBarState = Channel<Boolean>(Channel.CONFLATED)
+    var progressBarState: BehaviorSubject<Boolean> = BehaviorSubject.create()
 
     fun getFilmsFromApi(page: Int) {
         //Показываем ProgressBar
-        scope.launch {
-            progressBarState.send(true)
-        }
+        progressBarState.onNext(true)
         //Метод getDefaultCategoryFromPreferences() будет нам получать при каждом запросе нужный нам список фильмов
         retrofitService.getFilms(getDefaultCategoryFromPreferences(), API.KEY, "ru-RU", page)
             .enqueue(object : Callback<TmdbResults> {
@@ -37,20 +43,26 @@ class Interactor(
                     val list = Converter.convertApiListToDTOList(response.body()?.tmdbFilms)
                     //Кладем фильмы в бд
                     //В случае успешного ответа кладем фильмы в БД и выключаем ProgressBar
-                    scope.launch {
+                    Completable.fromSingle<List<Film>> {
                         repo.putToDb(list)
-                        progressBarState.send(false)
                     }
+                        .subscribeOn(Schedulers.io())
+                        .subscribe()
+                    progressBarState.onNext(false)
                 }
 
                 override fun onFailure(call: Call<TmdbResults>, t: Throwable) {
                     //В случае провала выключаем ProgressBar
-                    scope.launch {
-                        progressBarState.send(false)
-                    }
+                    progressBarState.onNext(false)
                 }
             })
     }
+
+    fun getSearchResultFromApi(search: String): Observable<List<Film>> =
+        retrofitService.getFilmFromSearch(API.KEY, "ru-RU", search, 1)
+            .map {
+                Converter.convertApiListToDTOList(it.tmdbFilms)
+            }
 
     //Метод для сохранения настроек
     fun saveDefaultCategoryToPreferences(category: String) {

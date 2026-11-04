@@ -11,6 +11,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
+
 
 @Module
 class RemoteModule {
@@ -35,6 +37,8 @@ class RemoteModule {
         .baseUrl(ApiConstants.BASE_URL)
         //Добавляем конвертер
         .addConverterFactory(GsonConverterFactory.create())
+        //Добавляем поддержку RxJava
+        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         //Добавляем кастомный клиент
         .client(okHttpClient)
         .build()
