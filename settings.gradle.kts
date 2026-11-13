@@ -23,8 +23,14 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
     }
+    versionCatalogs {
+        create("versions") {
+            from(files("gradle/versions.versions.toml"))
+        }
+    }
 }
 
 rootProject.name = "Films Search3"
 include(":app")
 
+include(":remote_module")
