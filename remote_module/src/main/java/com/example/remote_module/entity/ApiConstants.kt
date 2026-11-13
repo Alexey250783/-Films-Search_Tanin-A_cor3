@@ -1,4 +1,4 @@
-package com.example.filmssearch3.data
+package com.example.remote_module.entity
 
 object ApiConstants {
     const val BASE_URL = "https://api.themoviedb.org/3/movie/popular"

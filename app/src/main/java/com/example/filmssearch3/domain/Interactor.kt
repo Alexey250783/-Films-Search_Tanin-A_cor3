@@ -1,41 +1,44 @@
 package com.example.filmssearch3.domain
 
-import com.example.filmssearch3.data.MainRepository
 import com.example.filmssearch3.data.*
-import com.example.filmssearch3.data.Entity.TmdbResults
 import com.example.filmssearch3.data.preferenes.PreferenceProvider
 import com.example.filmssearch3.utils.Converter
 import com.example.filmssearch3.viewmodel.HomeFragmentViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.remote_module.TmdbApi
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.kotlin.subscribeBy
+import io.reactivex.rxjava3.schedulers.Schedulers
+import io.reactivex.rxjava3.subjects.BehaviorSubject
 
 
-class Interactor(
-    private val repo: MainRepository,
-    private val retrofitService: TmdbApi,
-    private val preferences: PreferenceProvider
-) {
+
+class Interactor(private val repo: MainRepository, private val retrofitService: TmdbApi, private val preferences: PreferenceProvider) {
+    var progressBarState: BehaviorSubject<Boolean> = BehaviorSubject.create()
+
     fun getFilmsFromApi(page: Int, callback: HomeFragmentViewModel.ApiCallback) {
+        //Показываем ProgressBar
+        progressBarState.onNext(true)
         //Метод getDefaultCategoryFromPreferences() будет нам получать при каждом запросе нужный нам список фильмов
         retrofitService.getFilms(getDefaultCategoryFromPreferences(), API.KEY, "ru-RU", page)
-            .enqueue(object : Callback<TmdbResults> {
-                override fun onResponse(call: Call<TmdbResults>, response: Response<TmdbResults>) {
-                    //При успехе мы вызываем метод передаем onSuccess и в этот коллбэк список фильмов
-                    val list = Converter.convertApiListToDTOList(response.body()?.tmdbFilms)
-                    //Кладем фильмы в бд
-                    list.forEach {
-                        repo.putToDb(film = it)
-                    }
-                    callback.onSuccess(list)
+            .subscribeOn(Schedulers.io())
+            .map {
+                Converter.convertApiListToDTOList(it.tmdbFilms)
+            }
+            .subscribeBy(
+                onError = {
+                    progressBarState.onNext(false)
+                },
+                onNext = {
+                    progressBarState.onNext(false)
+                    repo.putToDb(it)
                 }
-
-                override fun onFailure(call: Call<TmdbResults>, t: Throwable) {
-                    //В случае провала вызываем другой метод коллбека
-                    callback.onFailure()
-                }
-            })
+            )
     }
+
+    fun getSearchResultFromApi(search: String): Observable<List<Film>> = retrofitService.getFilmFromSearch(API.KEY, "ru-RU", search, 1)
+        .map {
+            Converter.convertApiListToDTOList(it.tmdbFilms)
+        }
 
     //Метод для сохранения настроек
     fun saveDefaultCategoryToPreferences(category: String) {
@@ -43,7 +46,7 @@ class Interactor(
     }
 
     //Метод для получения настроек
-    fun getDefaultCategoryFromPreferences() = preferences.geDefaultCategory()!!
-    //Метод будет дергать метод репозитория, чтобы забрать фильмы из БД
-    fun getFilmsFromDB(): List<Film> = repo.getAllFromDB()
+    fun getDefaultCategoryFromPreferences() = preferences.geDefaultCategory()
+
+    fun getFilmsFromDB(): Observable<List<Film>> = repo.getAllFromDB()
 }
