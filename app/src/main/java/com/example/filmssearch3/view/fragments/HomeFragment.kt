@@ -18,7 +18,7 @@ import com.example.filmssearch3.view.rv_adapters.FilmListRecyclerAdapter
 import com.example.filmssearch3.viewmodel.HomeFragmentViewModel
 import java.util.*
 import com.example.filmssearch3.R
-
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 class HomeFragment : Fragment() {
     private val viewModel by lazy {
